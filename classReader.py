@@ -30,6 +30,8 @@ class ClassReader(object):
         cleanedParts = []
         for line in lines:
             line = line.replace("{{skill-star}}{{skill-star}}","{{skill-star}}")
+            line = line.replace(" 】","】")
+            line = line.replace("【 ","【")
             found = line.find(" {{bulletpoint}}")
             if(found>0):
                 line = line.replace(" {{bulletpoint}}", "\n {{bulletpoint}}")
@@ -91,15 +93,15 @@ class ClassReader(object):
                 sk['lines'].append(ln)
             ln = lines.pop(0).strip()
         if sk is not None:
+            sk['text'] = " ".join(sk.pop('lines'))
             self.skills.append(sk)
-        print("done parsing class")
 
     def _extract_skill_name(self, line):
         if "{{skill-star}}" in line:
             match = re.search("\*([A-Z ]+)\* \(\{\{skill-star\}\}(.+)\)",line)
             return (match.group(1), match.group(2))
         else:
-            return (line, 0)
+            return (line, 1)
         
     def _get_bold(self, text):
         match = re.search("^(\s*)([a-zA-Z0-9 ]+?)(\s*)$",text)

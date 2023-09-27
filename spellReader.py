@@ -9,8 +9,14 @@ class SpellReader(object):
 
     def parse(self):
         cleaned = self._clean()
-        print(cleaned)
-        #self._cls_from_text(cleaned)
+        spells = self._to_spells(cleaned)
+        #print(f'cleaned spell text for class {self._cls["name"]}')
+        #print(cleaned)
+        if('spells' in self._cls):
+            self._cls['spells'] = self._cls['spells'] + spells
+        else:
+            self._cls['spells'] = spells
+
 
     def _clean(self):
         self._page.extract_text(visitor_text=self._spell_visitor)
@@ -24,9 +30,21 @@ class SpellReader(object):
             line = line.replace("{{attackspell}}{{attackspell}}","{{attackspell}}")
             line = line.replace("*T erra*","*Terra*")
             line = line.replace("*T orpor*","*Torpor*")
+            line = line.replace("cc Spells marked with {{attackspell}} are *offensive spells* and require *Magic Checks*!",'')
+            line = line.replace(" 】","】")
+            line = line.replace("【 ","【")
             found = line.find(" {{bulletpoint}}")
             if(found>0):
                 line = line.replace(" {{bulletpoint}}", "\n {{bulletpoint}}")
+            if(re.match("^\d+$",line.strip())):
+                #page number
+                continue
+            if("SPELL MP TARGET DURATION" in line.strip()):
+                #header
+                continue
+            if(f"WW{self._cls['name']} SPELLS" in line.strip()):
+                #header
+                continue
             cleanedParts.append(line)
         text = '\n'.join(cleanedParts)
         return text
@@ -59,46 +77,48 @@ class SpellReader(object):
             else:
                 self.parts.append(text)
 
-    def _cls_from_text(self, text):
+    def _to_spells(self, text):
         lines = text.splitlines()
-        ln = lines.pop(0).strip()
-        #class blocks start with free benefits.  Use this to grab the class name
-        clsName = ln.replace(" FREE BENEFITS","").strip()
-        #after this is a set of bullet-pointed benefits
-        ln = lines.pop(0).strip()
-        while "{{bulletpoint}}" in ln:
-            self.freeBenefits.append(ln)
+        spells = []
+        spell = None
+        while(len(lines)>0):
             ln = lines.pop(0).strip()
-        #skills
-        clsNameDoubleCheck = ln.replace(" SKILLS","").strip()
-        if(clsName != clsNameDoubleCheck):
-            print("class name and doublecheck don't match!")
-            print('class name from free benefits: ',clsName)
-            print('class name from skills: ',clsNameDoubleCheck)
-            exit(1)
-        self.className = clsName
-        ln = lines.pop(0).strip()
-        sk = None
-        while "{{bulletpoint}}" not in ln:
-            if re.search("^\*[A-Z ]+\*",ln):
-                if sk is not None:
-                    sk['text'] = " ".join(sk.pop('lines'))
-                    self.skills.append(sk)
-                (skill_name, max_select) = self._extract_skill_name(ln)
-                sk = {"name": skill_name, "max_select": max_select, "lines": []}
+            if(ln.endswith("Instantaneous") or ln.endswith("Scene")):
+                #finished parsing old spell
+                if(spell is not None):
+                    spell['text'] = " ".join(spell.pop('lines'))
+                    spells.append(spell)
+                spell = self._parse_spell_title_line(ln)
             else:
-                sk['lines'].append(ln)
-            ln = lines.pop(0).strip()
-        if sk is not None:
-            self.skills.append(sk)
-        print("done parsing class")
-
-    def _extract_skill_name(self, line):
-        if "{{skill-star}}" in line:
-            match = re.search("\*([A-Z ]+)\* \(\{\{skill-star\}\}(.+)\)",line)
-            return (match.group(1), match.group(2))
+                spell['lines'].append(ln)
+        #out of text, but we have a spell left to add to the list
+        spell['text'] = " ".join(spell.pop('lines'))
+        spells.append(spell)
+        return spells
+                    
+    def _parse_spell_title_line(self, line):
+        spell = {}
+        name = line[0:(line.index('*',1)+1)]
+        spell['name'] = name
+        spell['attack'] = ("{{attackspell}}" in line)
+        if("Instantaneous" in line):
+            spell['duration'] = 'Instantaneous'
         else:
-            return (line, 0)
+            spell['duration'] = 'Scene'
+        line = line.replace(name,"")
+        line = line.replace("{{attackspell}}","")
+        line = line.replace('Instantaneous','')
+        line = line.replace('Scene','')
+        line = line.strip()
+        #should be down to "(cost) (targets)"
+        match = re.match('^(up to \d+)|^(\d+ × T)|^(\d+)',line)
+        cost = match.group(0)
+        spell['cost'] = cost
+        line = line.replace(cost,'').strip()
+        spell['targets'] = line
+        spell['lines'] = []
+        return spell
+        #spells start with *(NAME)* (opt {{attackspell}}) (cost) (targets) (Instantaneous/Scene)
         
     def _get_bold(self, text):
         match = re.search("^(\s*)([a-zA-Z0-9 ]+?)(\s*)$",text)

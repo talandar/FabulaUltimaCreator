@@ -2,13 +2,13 @@ import PyPDF2
 import classReader
 import spellReader
 
-def parse_spells(text, dest_class):
-    print(f"get spells for {dest_class['name']}")
+import json
+
+classes = {}
 
 with open("/shared/RPGs/FabulaUltima/Fabula_Ultima_TTJRPG.pdf", "rb") as pdf_file:
     read_pdf = PyPDF2.PdfReader(pdf_file)
 
-    classes = {}
     spell_lists = {}
 
     number_of_pages = len(read_pdf.pages)
@@ -19,19 +19,18 @@ with open("/shared/RPGs/FabulaUltima/Fabula_Ultima_TTJRPG.pdf", "rb") as pdf_fil
             c_reader = classReader.ClassReader(page)
             parsed_class = c_reader.parse()
             classes[parsed_class['name']] = parsed_class
-            print(f"got class {parsed_class['name']} from page {page_num}")
         for className in classes.keys():
             if f"{className} SPELLS" in raw_text:
-                print(f'found spells on page {page_num} for class {className}, add next page to parse as well')
                 spell_lists[page_num+1] = className
                 sp_reader = spellReader.SpellReader(page,classes[className])
                 sp_reader.parse()
         if page_num in spell_lists.keys():
             className = spell_lists[page_num]
-            print(f'more spells for {className} on page {page_num}')
             sp_reader = spellReader.SpellReader(page,classes[className])
             sp_reader.parse()
 
-    #print(classes)
+for cls in classes.values():
+    with open(f"output_ignored/extracted_{cls['name']}.json",'wt') as output_json:
+        json.dump(cls,output_json, indent = 2, ensure_ascii=False)
     
 
