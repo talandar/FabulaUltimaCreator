@@ -15,6 +15,13 @@ var initMod = ""
 var defense = ""
 var magDefense = ""
 
+var equip_martial_armor = false
+var equip_martial_shield = false
+var equip_martial_melee = false
+var equip_martial_ranged = false
+
+var mainHand:EquipItem = null
+
 
 
 

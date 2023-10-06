@@ -15,10 +15,10 @@ script = ExtResource("2_kqsl7")
 
 [node name="NameField" type="HBoxContainer" parent="."]
 layout_mode = 0
-offset_left = 46.0
-offset_top = 23.0
-offset_right = 582.0
-offset_bottom = 63.0
+offset_left = 40.0
+offset_top = 10.0
+offset_right = 576.0
+offset_bottom = 50.0
 metadata/_edit_group_ = true
 
 [node name="NameLabel" type="Label" parent="NameField"]
