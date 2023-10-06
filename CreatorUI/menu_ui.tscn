@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://114xceow0in3"]
+[gd_scene load_steps=5 format=3 uid="uid://114xceow0in3"]
 
+[ext_resource type="Theme" uid="uid://cfy7ykyxasjn4" path="res://theme/fab_ult_theme.tres" id="1_13xmh"]
 [ext_resource type="Script" path="res://menu_ui.gd" id="1_700xs"]
 [ext_resource type="Texture2D" uid="uid://xet038hq6gj6" path="res://textures/mui-icons/menu.png" id="2_30viw"]
+[ext_resource type="PackedScene" uid="uid://bj1smyljx10it" path="res://character_sheet.tscn" id="4_fa2rp"]
 
 [node name="BaseUI" type="Control"]
 layout_mode = 3
@@ -10,6 +12,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_13xmh")
 script = ExtResource("1_700xs")
 
 [node name="CharacterBox" type="BoxContainer" parent="."]
@@ -31,4 +34,6 @@ flat = false
 title = "About This Tool"
 initial_position = 2
 size = Vector2i(400, 500)
-visible = true
+
+[node name="CharacterSheet" parent="." instance=ExtResource("4_fa2rp")]
+layout_mode = 1

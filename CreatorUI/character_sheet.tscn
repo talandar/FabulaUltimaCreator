@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://bj1smyljx10it"]
+
+[ext_resource type="Theme" uid="uid://cfy7ykyxasjn4" path="res://theme/fab_ult_theme.tres" id="1_jkfwf"]
+[ext_resource type="Script" path="res://character_sheet.gd" id="2_kqsl7"]
+
+[node name="CharacterSheet" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_jkfwf")
+script = ExtResource("2_kqsl7")
+
+[node name="NameField" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 46.0
+offset_top = 23.0
+offset_right = 582.0
+offset_bottom = 63.0
+metadata/_edit_group_ = true
+
+[node name="NameLabel" type="Label" parent="NameField"]
+layout_mode = 2
+theme = ExtResource("1_jkfwf")
+text = "Name and Pronouns
+"
+vertical_alignment = 1
+
+[node name="NameText" type="LineEdit" parent="NameField"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[connection signal="text_changed" from="NameField/NameText" to="." method="_on_any_text_changed"]

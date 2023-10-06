@@ -1,0 +1,6 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://cfy7ykyxasjn4"]
+
+[ext_resource type="FontFile" uid="uid://bi2hr81ku1nii" path="res://theme/Atkinson-Hyperlegible-Regular-102a.woff2" id="1_vqkfm"]
+
+[resource]
+default_font = ExtResource("1_vqkfm")
