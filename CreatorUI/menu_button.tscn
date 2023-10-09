@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://114xceow0in3"]
+
+[ext_resource type="Texture2D" uid="uid://xet038hq6gj6" path="res://textures/mui-icons/menu.png" id="1_xqb50"]
+[ext_resource type="Script" path="res://menu_button.gd" id="2_7pn8h"]
+
+[node name="MenuButton" type="MenuButton"]
+offset_right = 32.0
+offset_bottom = 32.0
+icon = ExtResource("1_xqb50")
+flat = false
+script = ExtResource("2_7pn8h")
+
+[node name="AcceptDialog" type="AcceptDialog" parent="."]
+title = "About This Tool"
+initial_position = 2
+size = Vector2i(400, 500)

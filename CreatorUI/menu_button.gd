@@ -1,6 +1,6 @@
 extends Control
 
-@onready var menu_control = $MenuButton
+@onready var menu_control = get_node('.')
 
 enum MenuIDs {
 	CHAR_NEW,

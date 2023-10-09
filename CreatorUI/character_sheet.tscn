@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://bj1smyljx10it"]
+[gd_scene load_steps=5 format=3 uid="uid://bj1smyljx10it"]
 
 [ext_resource type="Theme" uid="uid://cfy7ykyxasjn4" path="res://theme/fab_ult_theme.tres" id="1_jkfwf"]
 [ext_resource type="Script" path="res://character_sheet.gd" id="2_kqsl7"]
+[ext_resource type="PackedScene" uid="uid://114xceow0in3" path="res://menu_button.tscn" id="3_l787o"]
+[ext_resource type="PackedScene" uid="uid://d11k8w4uh5u4s" path="res://bond.tscn" id="3_tnyhb"]
 
 [node name="CharacterSheet" type="Control"]
 layout_mode = 3
@@ -13,23 +15,77 @@ grow_vertical = 2
 theme = ExtResource("1_jkfwf")
 script = ExtResource("2_kqsl7")
 
-[node name="NameField" type="HBoxContainer" parent="."]
-layout_mode = 0
-offset_left = 40.0
-offset_top = 10.0
-offset_right = 576.0
-offset_bottom = 50.0
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Topbar" type="HBoxContainer" parent="VBoxContainer/MarginContainer"]
+layout_mode = 2
 metadata/_edit_group_ = true
 
-[node name="NameLabel" type="Label" parent="NameField"]
+[node name="MenuButton" parent="VBoxContainer/MarginContainer/Topbar" instance=ExtResource("3_l787o")]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="VBoxContainer/MarginContainer/Topbar"]
 layout_mode = 2
 theme = ExtResource("1_jkfwf")
-text = "Name and Pronouns
-"
+text = "Name"
 vertical_alignment = 1
 
-[node name="NameText" type="LineEdit" parent="NameField"]
+[node name="NameText" type="LineEdit" parent="VBoxContainer/MarginContainer/Topbar"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[connection signal="text_changed" from="NameField/NameText" to="." method="_on_any_text_changed"]
+[node name="PronounsLabel" type="Label" parent="VBoxContainer/MarginContainer/Topbar"]
+layout_mode = 2
+text = "Pronouns"
+
+[node name="PronounsText" type="LineEdit" parent="VBoxContainer/MarginContainer/Topbar"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+metadata/_edit_group_ = true
+
+[node name="BondsContainer" type="HBoxContainer" parent="VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+metadata/_edit_group_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/BondsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Bond1" parent="VBoxContainer/ScrollContainer/BondsContainer/VBoxContainer" instance=ExtResource("3_tnyhb")]
+layout_mode = 2
+
+[node name="Bond2" parent="VBoxContainer/ScrollContainer/BondsContainer/VBoxContainer" instance=ExtResource("3_tnyhb")]
+layout_mode = 2
+
+[node name="Bond3" parent="VBoxContainer/ScrollContainer/BondsContainer/VBoxContainer" instance=ExtResource("3_tnyhb")]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/BondsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Bond4" parent="VBoxContainer/ScrollContainer/BondsContainer/VBoxContainer2" instance=ExtResource("3_tnyhb")]
+layout_mode = 2
+
+[node name="Bond5" parent="VBoxContainer/ScrollContainer/BondsContainer/VBoxContainer2" instance=ExtResource("3_tnyhb")]
+layout_mode = 2
+
+[node name="Bond6" parent="VBoxContainer/ScrollContainer/BondsContainer/VBoxContainer2" instance=ExtResource("3_tnyhb")]
+layout_mode = 2
+
+[connection signal="text_changed" from="VBoxContainer/MarginContainer/Topbar/NameText" to="." method="_on_any_text_changed"]
