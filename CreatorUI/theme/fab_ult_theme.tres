@@ -4,6 +4,7 @@
 
 [resource]
 default_font = ExtResource("1_n067k")
+CheckBox/font_sizes/font_size = 16
 MarginContainer/constants/margin_bottom = 5
 MarginContainer/constants/margin_left = 5
 MarginContainer/constants/margin_right = 5

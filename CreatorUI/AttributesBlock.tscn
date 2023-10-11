@@ -1,0 +1,144 @@
+[gd_scene load_steps=2 format=3 uid="uid://box0ltgu6wfic"]
+
+[ext_resource type="Theme" uid="uid://cfy7ykyxasjn4" path="res://theme/fab_ult_theme.tres" id="1_brrhl"]
+
+[node name="AttributesBox" type="VBoxContainer"]
+offset_left = 447.0
+offset_right = 447.0
+offset_bottom = 177.0
+theme = ExtResource("1_brrhl")
+
+[node name="ContainerLabel" type="Label" parent="."]
+layout_mode = 2
+text = "Attributes And Status Effects"
+horizontal_alignment = 1
+
+[node name="AttributeAlignment" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_type_variation = &"FullSizeCheck"
+metadata/_edit_group_ = true
+
+[node name="AttributeNames" type="VBoxContainer" parent="AttributeAlignment"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="SpaceFillLabel" type="Label" parent="AttributeAlignment/AttributeNames"]
+layout_mode = 2
+
+[node name="DEXLabel" type="Label" parent="AttributeAlignment/AttributeNames"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "DEXTERITY"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="INSLabel" type="Label" parent="AttributeAlignment/AttributeNames"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "INSIGHT"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="MIGLabel" type="Label" parent="AttributeAlignment/AttributeNames"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "MIGHT"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="WILLabel" type="Label" parent="AttributeAlignment/AttributeNames"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "WILLPOWER"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="AttrBaseValues" type="VBoxContainer" parent="AttributeAlignment"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="BaseLabel" type="Label" parent="AttributeAlignment/AttrBaseValues"]
+layout_mode = 2
+text = "Base
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BaseDEX" type="LineEdit" parent="AttributeAlignment/AttrBaseValues"]
+layout_mode = 2
+
+[node name="BaseINS" type="LineEdit" parent="AttributeAlignment/AttrBaseValues"]
+layout_mode = 2
+
+[node name="BaseMIG" type="LineEdit" parent="AttributeAlignment/AttrBaseValues"]
+layout_mode = 2
+
+[node name="BaseWIL" type="LineEdit" parent="AttributeAlignment/AttrBaseValues"]
+layout_mode = 2
+
+[node name="AttrTmpValues" type="VBoxContainer" parent="AttributeAlignment"]
+layout_mode = 2
+
+[node name="CurrentLabel" type="Label" parent="AttributeAlignment/AttrTmpValues"]
+layout_mode = 2
+text = "Current"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TmpDEX" type="LineEdit" parent="AttributeAlignment/AttrTmpValues"]
+layout_mode = 2
+
+[node name="TmpINS" type="LineEdit" parent="AttributeAlignment/AttrTmpValues"]
+layout_mode = 2
+
+[node name="TmpMIG" type="LineEdit" parent="AttributeAlignment/AttrTmpValues"]
+layout_mode = 2
+
+[node name="TmpWIL" type="LineEdit" parent="AttributeAlignment/AttrTmpValues"]
+layout_mode = 2
+
+[node name="StatusEffectsLight" type="VBoxContainer" parent="AttributeAlignment"]
+layout_mode = 2
+
+[node name="SpaceFillLabel" type="Label" parent="AttributeAlignment/StatusEffectsLight"]
+layout_mode = 2
+size_flags_vertical = 2
+
+[node name="SlowChk" type="CheckBox" parent="AttributeAlignment/StatusEffectsLight"]
+layout_mode = 2
+size_flags_vertical = 2
+text = "SLOW"
+
+[node name="DazedChk" type="CheckBox" parent="AttributeAlignment/StatusEffectsLight"]
+layout_mode = 2
+size_flags_vertical = 2
+text = "DAZED"
+
+[node name="WeakChk" type="CheckBox" parent="AttributeAlignment/StatusEffectsLight"]
+layout_mode = 2
+size_flags_vertical = 2
+text = "WEAK"
+
+[node name="ShakenChk" type="CheckBox" parent="AttributeAlignment/StatusEffectsLight"]
+layout_mode = 2
+size_flags_vertical = 2
+text = "SHAKEN"
+
+[node name="StatusEffectsHeavy" type="VBoxContainer" parent="AttributeAlignment"]
+layout_mode = 2
+alignment = 2
+
+[node name="SpaceFillLabel" type="Label" parent="AttributeAlignment/StatusEffectsHeavy"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="EnragedChk" type="CheckBox" parent="AttributeAlignment/StatusEffectsHeavy"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "ENRAGED"
+
+[node name="PoisonedChk" type="CheckBox" parent="AttributeAlignment/StatusEffectsHeavy"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "POISONED"
