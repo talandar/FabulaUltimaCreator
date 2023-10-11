@@ -1,68 +1,85 @@
-[gd_scene load_steps=3 format=3 uid="uid://d11k8w4uh5u4s"]
+[gd_scene load_steps=4 format=3 uid="uid://d11k8w4uh5u4s"]
 
 [ext_resource type="Theme" uid="uid://cfy7ykyxasjn4" path="res://theme/fab_ult_theme.tres" id="1_pp71f"]
 [ext_resource type="Script" path="res://bond.gd" id="1_rmini"]
+[ext_resource type="Texture2D" uid="uid://djx23mk5ybyu6" path="res://textures/kenneyUI/PNG/panelInset_blue.png" id="2_djvvc"]
 
-[node name="Bond" type="MarginContainer"]
-offset_right = 448.0
-offset_bottom = 66.0
+[node name="BondContainer" type="PanelContainer"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 440.0
+offset_bottom = 64.0
 theme = ExtResource("1_pp71f")
 script = ExtResource("1_rmini")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="BondBackgroundRect" type="NinePatchRect" parent="."]
+layout_mode = 2
+texture = ExtResource("2_djvvc")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="BondMarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme = ExtResource("1_pp71f")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="BondMarginContainer"]
 layout_mode = 2
 
-[node name="BondName" type="LineEdit" parent="HBoxContainer"]
+[node name="BondName" type="LineEdit" parent="BondMarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 theme_override_font_sizes/font_size = 32
 placeholder_text = "Bond"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="BondMarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 4
 metadata/_edit_group_ = true
 
-[node name="Admiration" type="CheckBox" parent="HBoxContainer/VBoxContainer"]
+[node name="Admiration" type="CheckBox" parent="BondMarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "Admiration"
 
-[node name="Inferiority" type="CheckBox" parent="HBoxContainer/VBoxContainer"]
+[node name="Inferiority" type="CheckBox" parent="BondMarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "Inferiority
 "
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="BondMarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 4
 metadata/_edit_group_ = true
 
-[node name="Loyalty" type="CheckBox" parent="HBoxContainer/VBoxContainer2"]
+[node name="Loyalty" type="CheckBox" parent="BondMarginContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 text = "Loyalty"
 
-[node name="Mistrust" type="CheckBox" parent="HBoxContainer/VBoxContainer2"]
+[node name="Mistrust" type="CheckBox" parent="BondMarginContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 text = "Mistrust"
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="HBoxContainer"]
+[node name="VBoxContainer3" type="VBoxContainer" parent="BondMarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 4
 metadata/_edit_group_ = true
 
-[node name="Affection" type="CheckBox" parent="HBoxContainer/VBoxContainer3"]
+[node name="Affection" type="CheckBox" parent="BondMarginContainer/HBoxContainer/VBoxContainer3"]
 layout_mode = 2
 text = "Affection
 "
 
-[node name="Hatred" type="CheckBox" parent="HBoxContainer/VBoxContainer3"]
+[node name="Hatred" type="CheckBox" parent="BondMarginContainer/HBoxContainer/VBoxContainer3"]
 layout_mode = 2
 text = "Hatred"
 
-[connection signal="pressed" from="HBoxContainer/VBoxContainer/Admiration" to="." method="_on_admiration_pressed"]
-[connection signal="pressed" from="HBoxContainer/VBoxContainer/Inferiority" to="." method="_on_inferiority_pressed"]
-[connection signal="pressed" from="HBoxContainer/VBoxContainer2/Loyalty" to="." method="_on_loyalty_pressed"]
-[connection signal="pressed" from="HBoxContainer/VBoxContainer2/Mistrust" to="." method="_on_mistrust_pressed"]
-[connection signal="pressed" from="HBoxContainer/VBoxContainer3/Affection" to="." method="_on_affection_pressed"]
-[connection signal="pressed" from="HBoxContainer/VBoxContainer3/Hatred" to="." method="_on_hatred_pressed"]
+[connection signal="pressed" from="BondMarginContainer/HBoxContainer/VBoxContainer/Admiration" to="BondMarginContainer" method="_on_admiration_pressed"]
+[connection signal="pressed" from="BondMarginContainer/HBoxContainer/VBoxContainer/Inferiority" to="BondMarginContainer" method="_on_inferiority_pressed"]
+[connection signal="pressed" from="BondMarginContainer/HBoxContainer/VBoxContainer2/Loyalty" to="BondMarginContainer" method="_on_loyalty_pressed"]
+[connection signal="pressed" from="BondMarginContainer/HBoxContainer/VBoxContainer2/Mistrust" to="BondMarginContainer" method="_on_mistrust_pressed"]
+[connection signal="pressed" from="BondMarginContainer/HBoxContainer/VBoxContainer3/Affection" to="BondMarginContainer" method="_on_affection_pressed"]
+[connection signal="pressed" from="BondMarginContainer/HBoxContainer/VBoxContainer3/Hatred" to="BondMarginContainer" method="_on_hatred_pressed"]

@@ -1,15 +1,15 @@
-extends MarginContainer
+extends Control
 
-@onready var bond_name:LineEdit = $HBoxContainer/BondName
+@onready var bond_name:LineEdit = $BondMarginContainer/HBoxContainer/BondName
 
-@onready var admiration_box:CheckBox = $HBoxContainer/VBoxContainer/Admiration
-@onready var inferiority_box:CheckBox = $HBoxContainer/VBoxContainer/Inferiority
+@onready var admiration_box:CheckBox = $BondMarginContainer/HBoxContainer/VBoxContainer/Admiration
+@onready var inferiority_box:CheckBox = $BondMarginContainer/HBoxContainer/VBoxContainer/Inferiority
 
-@onready var loyalty_box:CheckBox = $HBoxContainer/VBoxContainer2/Loyalty
-@onready var mistrust_box:CheckBox = $HBoxContainer/VBoxContainer2/Mistrust
+@onready var loyalty_box:CheckBox = $BondMarginContainer/HBoxContainer/VBoxContainer2/Loyalty
+@onready var mistrust_box:CheckBox = $BondMarginContainer/HBoxContainer/VBoxContainer2/Mistrust
 
-@onready var affection_box:CheckBox = $HBoxContainer/VBoxContainer3/Affection
-@onready var hatred_box:CheckBox = $HBoxContainer/VBoxContainer3/Hatred
+@onready var affection_box:CheckBox = $BondMarginContainer/HBoxContainer/VBoxContainer3/Affection
+@onready var hatred_box:CheckBox = $BondMarginContainer/HBoxContainer/VBoxContainer3/Hatred
 
 func export():
 	var dict = {
