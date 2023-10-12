@@ -37,3 +37,20 @@ func export():
 		"status_poisoned": status_poisoned.button_pressed
 	}
 	return dict
+	
+func import(dict):
+	base_dex.text = dict["dex"]
+	base_ins.text = dict["ins"]
+	base_mig.text = dict["mig"]
+	base_wil.text = dict["wil"]
+	tmp_dex.text = dict["tmp_dex"]
+	tmp_ins.text = dict["tmp_ins"]
+	tmp_mig.text = dict["tmp_mig"]
+	tmp_wil.text = dict["tmp_wil"]
+	status_slow.button_pressed = dict["status_slow"]
+	status_daze.button_pressed = dict["status_daze"]
+	status_weak.button_pressed = dict["status_weak"]
+	status_shaken.button_pressed = dict["status_shaken"]
+	status_enraged.button_pressed = dict["status_enraged"]
+	status_poisoned.button_pressed = dict["status_poisoned"]
+	
